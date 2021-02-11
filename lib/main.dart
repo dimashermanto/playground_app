@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'Education.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -7,15 +8,6 @@ void main() {
   ));
 }
 
-class Education {
-  String educationName;
-  String educationTimeRange;
-
-  Education(String educationName, String educationTimeRange) {
-    this.educationName = educationName;
-    this.educationTimeRange = educationTimeRange;
-  }
-}
 
 class Profile extends StatelessWidget {
   final Color baseColor = Colors.greenAccent[200];
@@ -170,3 +162,5 @@ class Profile extends StatelessWidget {
     );
   }
 }
+
+
