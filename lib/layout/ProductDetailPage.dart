@@ -9,6 +9,8 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
 
   Map productDetail = {};
+  bool isProgressIndicatorVisible = true;
+  bool isProductDetailVisible = false;
 
   Widget renderAppbar() {
     return AppBar(
@@ -37,6 +39,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
     setState(() {
       this.productDetail = productDetail;
+      this.isProgressIndicatorVisible = false;
+      this.isProductDetailVisible = true;
     });
   }
 
@@ -56,6 +60,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: renderAppbar(),
+      floatingActionButton: Visibility(
+        visible: this.isProductDetailVisible,
+        child: FloatingActionButton(
+          backgroundColor: Colors.black,
+          onPressed: (){},
+          child: Icon(Icons.shopping_basket),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -65,34 +77,48 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               SizedBox(height: 8,),
               Center(child: Image.network("${this.productDetail["image"]}", height: 250,)),
               SizedBox(height: 16,),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("${this.productDetail["title"]}", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, letterSpacing: 1.0),),
-                        SizedBox(height: 6,),
-                        Text("${this.productDetail["category"]}", style: TextStyle(color: Colors.grey[500], letterSpacing: 1.0, fontSize: 12),),
-                      ],
-                    ),
+              Visibility(
+                visible: this.isProgressIndicatorVisible,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text("\$${this.productDetail["price"]}", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, letterSpacing: 1.0),),
-                      ],
+                ),
+              ),
+              Visibility(
+                visible: this.isProductDetailVisible,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("${this.productDetail["title"]}", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, letterSpacing: 1.0,), maxLines: 3,),
+                          SizedBox(height: 6,),
+                          Text("${this.productDetail["category"]}", style: TextStyle(color: Colors.grey[500], letterSpacing: 1.0, fontSize: 12),),
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text("\$${this.productDetail["price"]}", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, letterSpacing: 1.0),),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 16,),
-              Text(
-                "${this.productDetail["description"]}",
-                style: TextStyle(letterSpacing: 1.0, height: 1.6, ),
+              Visibility(
+                visible: this.isProductDetailVisible,
+                child: Text(
+                  "${this.productDetail["description"]}",
+                  style: TextStyle(letterSpacing: 1.0, height: 1.6, ),
+                ),
               )
             ],
           ),
