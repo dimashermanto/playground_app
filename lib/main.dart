@@ -20,6 +20,8 @@ class _PlaygroundState extends State<Playground> {
       TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
   List productList = [];
+  bool isProgressIndicatorVisible = true;
+  bool isProductListVisible = false;
 
   Widget renderAppbar() {
     return AppBar(
@@ -36,6 +38,8 @@ class _PlaygroundState extends State<Playground> {
 
     setState(() {
       this.productList = productList;
+      this.isProgressIndicatorVisible = false;
+      this.isProductListVisible = true;
     });
   }
 
@@ -49,9 +53,29 @@ class _PlaygroundState extends State<Playground> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: renderAppbar(),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ProductListLayout(productList: productList),
+        body: Column(
+          children: [
+
+            Visibility(visible: this.isProgressIndicatorVisible, child: SizedBox(height: 24,)),
+
+            Visibility(
+              visible: this.isProgressIndicatorVisible,
+              child: Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Visibility(
+                visible: this.isProductListVisible,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ProductListLayout(productList: productList),
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }
