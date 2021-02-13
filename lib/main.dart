@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playground_app/API/ProductAPI.dart';
+import 'package:playground_app/layout/ProductListLayout.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -50,30 +51,8 @@ class _PlaygroundState extends State<Playground> {
         appBar: renderAppbar(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 16),
-              itemCount: this.productList.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: Image.network(
-                                this.productList[index]["image"])),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Text(this.productList[index]["title"], maxLines: 2,)
-                      ],
-                    ),
-                  ),
-                );
-              }),
+          child: ProductListLayout(productList: productList),
         ));
   }
 }
+
