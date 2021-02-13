@@ -66,7 +66,7 @@ class _ProductListPageState extends State<ProductListPage> {
               child: Visibility(
                 visible: this.isProductListVisible,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   child: ProductListLayout(productList: productList),
                 ),
               ),
