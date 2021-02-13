@@ -23,7 +23,7 @@ class _ProductListPageState extends State<ProductListPage> {
       title: Text("All Products", style: TextStyle(color: Colors.black),),
       backgroundColor: baseColor,
       centerTitle: true,
-      elevation: 2,
+      elevation: 0,
     );
   }
 
