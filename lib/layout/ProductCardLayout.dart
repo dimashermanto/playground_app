@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard({
     Key key,
     @required this.productList,
@@ -11,16 +11,31 @@ class ProductCard extends StatelessWidget {
   final int index;
 
   @override
+  _ProductCardState createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+
+  void navigateToDetail(int productId){
+    Navigator.pushNamed(context, "/productDetail", arguments: {
+      "productId": productId
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     Radius cardBorderRadius = Radius.circular(12.0);
+
+    int index = this.widget.index;
+    List productList = this.widget.productList;
 
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(cardBorderRadius)),
       child: InkWell(
         onTap: (){
-          print("The item's name is ${this.productList[index]["title"]}");
+          this.navigateToDetail(productList[index]["id"]);
         },
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -34,21 +49,21 @@ class ProductCard extends StatelessWidget {
               Expanded(
                   child: Center(
                     child: Image.network(
-                        this.productList[index]["image"]),
+                        productList[index]["image"]),
                   )),
               SizedBox(
                 height: 12,
               ),
 
               //Product Name
-              Text(this.productList[index]["title"], maxLines: 2,),
+              Text(productList[index]["title"], maxLines: 2,),
               SizedBox(
                 height: 12,
               ),
 
               //Product Price
               Text(
-                "\$${this.productList[index]["price"]}",
+                "\$${productList[index]["price"]}",
                 maxLines: 1,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),

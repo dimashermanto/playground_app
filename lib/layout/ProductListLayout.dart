@@ -4,7 +4,7 @@ import 'package:playground_app/layout/ProductCardLayout.dart';
 class ProductListLayout extends StatelessWidget {
   const ProductListLayout({
     Key key,
-    @required this.productList,
+    @required this.productList
   }) : super(key: key);
 
   final List productList;

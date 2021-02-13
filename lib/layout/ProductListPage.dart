@@ -23,7 +23,7 @@ class _ProductListPageState extends State<ProductListPage> {
       title: Text("All Products", style: TextStyle(color: Colors.black),),
       backgroundColor: baseColor,
       centerTitle: true,
-      elevation: 3,
+      elevation: 2,
     );
   }
 
@@ -38,12 +38,6 @@ class _ProductListPageState extends State<ProductListPage> {
     });
   }
 
-  void navigateToDetail(String productId){
-    Navigator.pushNamed(context, "/productDetail", arguments: {
-      "productId": productId
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -53,6 +47,7 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: renderAppbar(),
         body: Column(
           children: [
